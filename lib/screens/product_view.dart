@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../providers/cart_provider.dart';
 import '../providers/product.dart';
+import '../widgets/drawer.dart';
 import '../widgets/product_grid.dart';
 import '../widgets/badges.dart' as badgewidget;
 import '../screens/cart_screen.dart';
@@ -61,7 +62,8 @@ class _ProductViewState extends State<ProductView> {
             child: IconButton(
               onPressed: () {
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => CartScreen()));
+                  MaterialPageRoute(builder: (context) => const CartScreen()),
+                );
               },
               icon: const Icon(Icons.shopping_cart),
             ),
@@ -69,6 +71,7 @@ class _ProductViewState extends State<ProductView> {
         ],
       ),
       body: ProdutGrid(_showFavorites),
+      drawer: const MyDrawer(),
     );
   }
 }
