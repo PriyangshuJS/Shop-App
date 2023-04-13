@@ -18,16 +18,15 @@ class _ProdutGridState extends State<ProdutGrid> {
     final productsData = Provider.of<Products>(context);
     final products =
         widget.showFav ? productsData.favoriteItems : productsData.item;
-    // print("\@nd -\n");
-    // print(productsData.favoriteItems.map((e) => e.title));
+
     return GridView.builder(
       padding: const EdgeInsets.all(10),
       itemCount: products.length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 3 / 2,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
+        childAspectRatio: 2 / 3,
+        crossAxisSpacing: 15,
+        mainAxisSpacing: 15,
       ),
       itemBuilder: (ctx, index) => ChangeNotifierProvider.value(
         // create: (c) => products[index],
