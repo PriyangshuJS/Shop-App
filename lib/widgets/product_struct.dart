@@ -22,7 +22,10 @@ class _ProductStructureState extends State<ProductStructure> {
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
         footer: GridTileBar(
-          title: Text(productSt.title),
+          title: Text(
+            productSt.title,
+            maxLines: 2,
+          ),
           leading: Consumer<Product>(
             builder: (context, loadedProduct, child) => IconButton(
               icon: Icon(
@@ -39,8 +42,27 @@ class _ProductStructureState extends State<ProductStructure> {
           backgroundColor: Colors.black54,
           trailing: IconButton(
             icon: const Icon(Icons.shopping_cart),
-            onPressed: () =>
-                cart.addItem(productSt.title, productSt.id, productSt.price),
+            onPressed: () {
+              cart.addItem(productSt.title, productSt.id, productSt.price);
+              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: const Text(
+                    "Item Added to Cart !",
+                    textAlign: TextAlign.left,
+                  ),
+                  duration: const Duration(seconds: 2),
+                  action: SnackBarAction(
+                    label: "UNDO",
+                    onPressed: () {
+                      cart.undo(productSt.id);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text("Item Removed 1 !")));
+                    },
+                  ),
+                ),
+              );
+            },
           ),
         ),
         child: GestureDetector(

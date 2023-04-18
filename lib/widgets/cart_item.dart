@@ -56,6 +56,23 @@ class CartProducts extends StatelessWidget {
               trailing: Text(("₹ ${price * quantity}").toString()),
             ),
           ),
+          confirmDismiss: (direction) {
+            return showDialog(
+              context: context,
+              builder: ((context) => AlertDialog(
+                    title: const Text("Are you sure?"),
+                    content: const Text("Remove Item from Cart"),
+                    actions: [
+                      OutlinedButton(
+                          onPressed: () => Navigator.of(context).pop(false),
+                          child: const Text("No")),
+                      OutlinedButton(
+                          onPressed: () => Navigator.of(context).pop(true),
+                          child: const Text("Yes"))
+                    ],
+                  )),
+            );
+          },
         )
       ],
     );
