@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../screens/user_product.dart';
 import '../screens/order_screen.dart';
 import '../screens/product_view.dart';
 
@@ -40,6 +41,20 @@ class MyDrawer extends StatelessWidget {
             ),
             leading: const Icon(
               Icons.payment,
+              size: 30,
+            )),
+        const Divider(),
+        ListTile(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const UserProducts()));
+            },
+            title: const Text(
+              "User Product",
+              style: TextStyle(fontSize: 18),
+            ),
+            leading: const Icon(
+              Icons.verified_user,
               size: 30,
             )),
       ]),
