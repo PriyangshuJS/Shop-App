@@ -18,43 +18,44 @@ class _EditProductState extends State<EditProduct> {
   final _imageUrlFocousNode = FocusNode();
   final _form = GlobalKey<FormState>();
   var _editedProduct = Product(
+    id: "",
     title: "",
     description: "",
     price: 0,
     imageUrl: "",
   );
-  var _isInit = true;
-  var _initValues = {
-    "title": "",
-    "price": "",
-    "description": "",
-    "imageUrl": "",
-  };
+  // var _isInit = true;
+  // var _initValues = {
+  //   "title": "",
+  //   "price": "",
+  //   "description": "",
+  //   "imageUrl": "",
+  // };
   @override
   void initState() {
     _imageUrlFocousNode.addListener(_updateImageUrl);
     super.initState();
   }
 
-  @override
-  void didChangeDependencies() {
-    if (_isInit) {
-      final prodId = ModalRoute.of(context)!.settings.arguments;
-      if (prodId != null) {
-        _editedProduct = Provider.of<Products>(context, listen: false)
-            .findbyId(prodId as String);
-        _initValues = {
-          "title": _editedProduct.title,
-          "price": _editedProduct.price.toString(),
-          "description": _editedProduct.description,
-          "imageUrl": "",
-        };
-        _imageUrlController.text = _editedProduct.imageUrl;
-      }
-    }
-    _isInit = false;
-    super.didChangeDependencies();
-  }
+  // @override
+  // void didChangeDependencies() {
+  //   if (_isInit) {
+  //     final prodId = ModalRoute.of(context)!.settings.arguments;
+  //     if (prodId != null) {
+  //       _editedProduct = Provider.of<Products>(context, listen: false)
+  //           .findbyId(prodId as String);
+  //       _initValues = {
+  //         "title": _editedProduct.title,
+  //         "price": _editedProduct.price.toString(),
+  //         "description": _editedProduct.description,
+  //         "imageUrl": "",
+  //       };
+  //       _imageUrlController.text = _editedProduct.imageUrl;
+  //     }
+  //   }
+  //   _isInit = false;
+  //   super.didChangeDependencies();
+  // }
 
   @override
   void dispose() {
@@ -84,18 +85,15 @@ class _EditProductState extends State<EditProduct> {
       return;
     }
     _form.currentState?.save();
-    if (_editedProduct.id != null) {
-      Provider.of<Products>(context, listen: false)
-          .updatePoduct(_editedProduct.id!, _editedProduct);
-    } else {
-      Provider.of<Products>(context, listen: false).addProduct(_editedProduct);
-    }
+    Provider.of<Products>(context, listen: false).addProduct(_editedProduct);
+    // if (_editedProduct.id != null) {
+    //   Provider.of<Products>(context, listen: false)
+    //       .updatePoduct(_editedProduct.id!, _editedProduct);
+    // } else {
+    //   Provider.of<Products>(context, listen: false).addProduct(_editedProduct);
+    // }
 
     Navigator.of(context).pop();
-    // print(_editedProduct.id);
-    // print(_editedProduct.title);
-    // print(_editedProduct.description);
-    // print(_editedProduct.imageUrl);
   }
 
   @override
@@ -116,7 +114,7 @@ class _EditProductState extends State<EditProduct> {
             child: Column(
               children: [
                 TextFormField(
-                  initialValue: _initValues["title"],
+                  //initialValue: _initValues["title"],
                   decoration: const InputDecoration(labelText: "Title"),
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -140,7 +138,7 @@ class _EditProductState extends State<EditProduct> {
                   },
                 ),
                 TextFormField(
-                  initialValue: _initValues["price"],
+                  //initialValue: _initValues["price"],
                   decoration: const InputDecoration(labelText: "Price"),
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -172,7 +170,7 @@ class _EditProductState extends State<EditProduct> {
                   },
                 ),
                 TextFormField(
-                  initialValue: _initValues["description"],
+                  //initialValue: _initValues["description"],
                   decoration: const InputDecoration(labelText: "Description"),
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -208,18 +206,20 @@ class _EditProductState extends State<EditProduct> {
                       child: _imageUrlController.text.isEmpty
                           ? const Center(
                               child: Text(
-                              "Enter Product Image URL",
-                              textAlign: TextAlign.center,
-                            ))
+                                "Enter Product Image URL",
+                                textAlign: TextAlign.center,
+                              ),
+                            )
                           : FittedBox(
                               child: Image.network(
-                              _imageUrlController.text,
-                              fit: BoxFit.contain,
-                            )),
+                                _imageUrlController.text,
+                                fit: BoxFit.contain,
+                              ),
+                            ),
                     ),
                     Expanded(
                       child: TextFormField(
-                        initialValue: _initValues["imageUrl"],
+                        //initialValue: _initValues["imageUrl"],
                         decoration:
                             const InputDecoration(labelText: "Image URL"),
                         validator: (value) {
@@ -228,6 +228,9 @@ class _EditProductState extends State<EditProduct> {
                         keyboardType: TextInputType.url,
                         textInputAction: TextInputAction.done,
                         controller: _imageUrlController,
+                        onChanged: (_) {
+                          setState(() {});
+                        },
                         focusNode: _imageUrlFocousNode,
                         onFieldSubmitted: (_) {
                           _submitForm();

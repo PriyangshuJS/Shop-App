@@ -43,7 +43,7 @@ class _ProductStructureState extends State<ProductStructure> {
           trailing: IconButton(
             icon: const Icon(Icons.shopping_cart),
             onPressed: () {
-              cart.addItem(productSt.title, productSt.id!, productSt.price);
+              cart.addItem(productSt.title, productSt.id, productSt.price);
               ScaffoldMessenger.of(context).hideCurrentSnackBar();
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
@@ -55,7 +55,7 @@ class _ProductStructureState extends State<ProductStructure> {
                   action: SnackBarAction(
                     label: "UNDO",
                     onPressed: () {
-                      cart.undo(productSt.id!);
+                      cart.undo(productSt.id);
                       ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text("Item Removed 1 !")));
                     },

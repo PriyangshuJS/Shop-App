@@ -27,7 +27,7 @@ class _ProductViewState extends State<ProductView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 72, 154, 187),
+        backgroundColor: const Color.fromARGB(255, 72, 154, 187),
         title: const Text("Shop App"),
         actions: [
           PopupMenuButton(

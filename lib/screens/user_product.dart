@@ -26,7 +26,7 @@ class UserProducts extends StatelessWidget {
       body: ListView.builder(
         itemBuilder: (context, index) => Column(children: [
           UserProductStruct(
-            prodId: prodData.item[index].id!,
+            prodId: prodData.item[index].id,
             prodTitle: prodData.item[index].title,
             prodImg: prodData.item[index].imageUrl,
           ),

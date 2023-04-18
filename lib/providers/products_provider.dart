@@ -140,16 +140,16 @@ class Products with ChangeNotifier {
     _item.add(newProduct);
     notifyListeners();
   }
-
-  void updatePoduct(String id, Product newProduct) {
-    final prodIndex = _item.indexWhere((prod) => prod.id == id);
-    if (prodIndex >= 0) {
-      _item[prodIndex] = newProduct;
-      notifyListeners();
-    } else {
-      print('...');
-    }
-  }
+//For Editing Existin Products -
+  // void updatePoduct(String id, Product newProduct) {
+  //   final prodIndex = _item.indexWhere((prod) => prod.id == id);
+  //   if (prodIndex >= 0) {
+  //     _item[prodIndex] = newProduct;
+  //     notifyListeners();
+  //   } else {
+  //     print('...');
+  //   }
+  // }
 
   void deleteProd(String id) {
     _item.removeWhere((prod) => prod.id == id);

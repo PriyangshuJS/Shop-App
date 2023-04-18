@@ -20,31 +20,14 @@ class UserProductStruct extends StatelessWidget {
     return ListTile(
       title: Text(prodTitle),
       leading: CircleAvatar(backgroundImage: NetworkImage(prodImg)),
-      trailing: SizedBox(
-        width: 100,
-        child: Row(
-          children: [
-            IconButton(
-                icon: const Icon(
-                  Icons.edit,
-                  color: Colors.blueAccent,
-                ),
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const EditProduct()));
-                }),
-            IconButton(
-                onPressed: () {
-                  Provider.of<Products>(context, listen: false)
-                      .deleteProd(prodId);
-                },
-                icon: const Icon(
-                  Icons.delete,
-                  color: Colors.deepOrange,
-                )),
-          ],
-        ),
-      ),
+      trailing: IconButton(
+          onPressed: () {
+            Provider.of<Products>(context, listen: false).deleteProd(prodId);
+          },
+          icon: const Icon(
+            Icons.delete,
+            color: Colors.deepOrange,
+          )),
     );
   }
 }
